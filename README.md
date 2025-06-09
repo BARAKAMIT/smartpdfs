@@ -31,12 +31,13 @@
 3. Run `pnpm install` to install dependencies
 4. Run `pnpm prisma generate` to generate the Prisma client
 5. Run `pnpm dev` to start the development server
+6. Open the app and click **Use Demo PDF** to test with the bundled sample document
 
 ## Roadmap
 
 - [ ] Add some rate limiting by IP address
-- [ ] Integrate OCR for image parsing in PDFs
+- [x] Integrate OCR for image parsing in PDFs
 - [ ] Add a bit more polish (make the link icon nicer) & add a "powered by Together" sign
 - [ ] Implement additional revision steps for improved summaries
-- [ ] Add a demo PDF for new users to be able to see it in action
+- [x] Add a demo PDF for new users to be able to see it in action
 - [ ] Add feedback system with thumbs up/down feature

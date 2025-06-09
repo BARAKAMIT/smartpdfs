@@ -90,6 +90,21 @@ export const HomeLandingDrop = ({
                 </div>
               )}
             </Dropzone>
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-2 self-start"
+              onClick={async () => {
+                const res = await fetch("/demo.pdf");
+                const blob = await res.blob();
+                const demoFile = new File([blob], "demo.pdf", {
+                  type: "application/pdf",
+                });
+                setFile(demoFile);
+              }}
+            >
+              Use Demo PDF
+            </Button>
             <label className="mt-8 text-gray-500" htmlFor="language">
               Language
             </label>
