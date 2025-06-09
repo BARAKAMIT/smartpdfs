@@ -1,5 +1,6 @@
 import { PDFDocumentProxy } from "pdfjs-dist";
 import assert from "assert";
+import Tesseract from "tesseract.js";
 
 export type Chunk = {
   text: string;
@@ -35,6 +36,19 @@ export async function getPdfText(pdf: PDFDocumentProxy) {
         pageText += item.str;
         lastY = item.transform[5];
       }
+    }
+
+    if (pageText.trim().length === 0) {
+      const viewport = page.getViewport({ scale: 2 });
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await page.render({ canvasContext: context!, viewport }).promise;
+      const {
+        data: { text },
+      } = await Tesseract.recognize(canvas, "eng");
+      pageText = text;
     }
 
     fullText += pageText + "\n\n"; // Add double newline between pages
